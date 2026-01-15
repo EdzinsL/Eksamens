@@ -112,11 +112,10 @@ public class Valstusp {
 		if (pasreizeja.equals(merkis)) {
 			return "Esi sasniedzis galamērķi!";
 		}
-
-		return "Nokļuvāt no "+ sakums +" uz "+ merkis;
 	}
 }
 	
+
 
 
 
