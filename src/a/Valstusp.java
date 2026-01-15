@@ -82,8 +82,8 @@ public class Valstusp {
 		sakums = valstis.get(rand.nextInt(valstis.size()));
         merkis = valstis.get(rand.nextInt(valstis.size()));
 
-		while (sakums.equals(beigas)) {
-			beigas = valstis.get (rand.nextInt(valstis.size()));
+		while (sakums.equals(merkis)) {
+			merkis = valstis.get (rand.nextInt(valstis.size()));
 		}
 
 		pasreizeja = sakums;
@@ -93,7 +93,7 @@ public class Valstusp {
 		return merkis;
 	}
 	
-    public String getPasreizeja();
+    public String getPasreizeja() {
 		return pasreizeja;
 	}
 
@@ -101,24 +101,23 @@ public class Valstusp {
 		
 		if (!robezas.containsKey(ievade)) {
             System.out.println("Šāda valsts nav sarakstā!");
-            break;
         }
 
         if (!robezas.get(pasreizeja).contains(ievade)) {
             System.out.println(ievade + " nerobežojas ar " + pasreizeja);
-            break;
         }
 
 		pasreizeja = ievade;
 
 		if (pasreizeja.equals(merkis)) {
-			return "Esi sasniedzis galamērķi!"
+			return "Esi sasniedzis galamērķi!";
 		}
 
 		return "Nokļuvāt no "+ sakums +" uz "+ merkis;
 	}
 }
 	
+
 
 
 
