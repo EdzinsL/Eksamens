@@ -9,6 +9,7 @@ public class SpelesGUI extends JFrame {
     private JLabel statusaEtikete = new JLabel("Pašreizēja valsts: ---");
     private JLabel merkaEtikete = new JLabel("Galamērķis: ---");
     private JButton celotPoga = new JButton("Ceļot");
+    private SpelesLogika spele;
 
     public SpelesGUI() {
     	
@@ -51,9 +52,9 @@ public class SpelesGUI extends JFrame {
         add(ritjosla, BorderLayout.CENTER);
 
         // Valsts ievades lauks apakšā
-        JLabel instrukcijasEtiķete = new JLabel("Ievadiet kaimiņvalsti:");
-        instrukcijasEtiķete.setFont(new Font("SansSerif", Font.BOLD, 13));
-        instrukcijasEtiķete.setForeground(gaissTeksts);
+        JLabel instrukcijasEtikete = new JLabel("Ievadiet kaimiņvalsti:");
+        instrukcijasEtikete.setFont(new Font("SansSerif", Font.BOLD, 13));
+        instrukcijasEtikete.setForeground(gaissTeksts);
         JPanel apaksasPanelis = new JPanel(new BorderLayout(2, 2));
         apaksasPanelis.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         apaksasPanelis.setBackground(tumssFons);
@@ -75,6 +76,19 @@ public class SpelesGUI extends JFrame {
         // Loga centralizācija
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        spele = new SpelesLogika();
+        iestatitMerki(spele.getMerkis());
+        iestatitStatusu(spele.getPasreizeja());
+        iegutCelotPogu().addActionListener(e -> {
+            String ievade = iegutIevadi().trim();
+            if (ievade.isEmpty()) return;
+            String rezultats = spele.apstradatIevadi(ievade);
+            pievienotVesturei(ievade + " — " + rezultats);
+            iestatitStatusu(spele.getPasreizeja());
+            notiritIevadi();
+        });
+        
     }
 
     // Logika, ko var piesaistīt
@@ -108,4 +122,5 @@ public class SpelesGUI extends JFrame {
         
         new SpelesGUI();
     }
+
 }
