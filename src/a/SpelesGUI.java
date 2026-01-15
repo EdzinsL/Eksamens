@@ -58,7 +58,7 @@ public class SpelesGUI extends JFrame {
         JPanel apaksasPanelis = new JPanel(new BorderLayout(2, 2));
         apaksasPanelis.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         apaksasPanelis.setBackground(tumssFons);
-        apaksasPanelis.add(instrukcijasEtiķete, BorderLayout.NORTH);
+        apaksasPanelis.add(instrukcijasEtikete, BorderLayout.NORTH);
         apaksasPanelis.add(ievadesLauks, BorderLayout.CENTER);
         apaksasPanelis.add(celotPoga, BorderLayout.EAST);
         add(apaksasPanelis, BorderLayout.SOUTH);
@@ -124,4 +124,5 @@ public class SpelesGUI extends JFrame {
     }
 
 }
+
 
