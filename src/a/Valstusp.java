@@ -75,5 +75,45 @@ public class Valstusp {
 		while (sakums.equals(beigas)) {
 			beigas = valstis.get (rand.nextInt(valstis.size()));
 		}
+
+		 System.out.println("Savieno Eiropas valstis!");
+        System.out.println("Sākuma valsts: " + sakums);
+        System.out.println("Mērķa valsts: " + beigas);
+        System.out.println("Ievadi valstis PA VIENAI (raksti 'stop', lai padotos)\n");
+
+        Scanner sc = new Scanner(System.in);
+        String iepriekseja = sakums;
+
+        while (true) {
+            System.out.print("Nākamā valsts: ");
+            String ievade = sc.nextLine().trim();
+
+            if (ievade.equalsIgnoreCase("stop")) {
+                System.out.println("Spēle pārtraukta.");
+                break;
+            }
+
+            if (!robezas.containsKey(ievade)) {
+                System.out.println("Šāda valsts nav sarakstā!");
+                break;
+            }
+
+            if (!robezas.get(iepriekseja).contains(ievade)) {
+                System.out.println(ievade + " nerobežojas ar " + iepriekseja);
+                break;
+            }
+
+            iepriekseja = ievade;
+
+            if (iepriekseja.equals(beigas)) {
+                System.out.println("Apsveicu! Tu sasniedzi mērķa valsti!");
+                break;
+            }
+        }
+
+        sc.close();
+    }
+}
 	}
 }
+
