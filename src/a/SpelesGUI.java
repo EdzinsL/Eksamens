@@ -6,13 +6,13 @@ import java.awt.*;
 public class SpelesGUI extends JFrame {
     private JTextField ievadesLauks = new JTextField();
     private JTextArea vesturesLauks = new JTextArea();
-    private JLabel statusaEtikete = new JLabel("Pašreizēja valsts: ---");
     private JLabel merkaEtikete = new JLabel("Galamērķis: ---");
+    private JLabel sakumaEtikete = new JLabel("Sākuma valsts: ---");
+    private JLabel statusaEtikete = new JLabel("Pašreizēja valsts: ---");
     private JButton celotPoga = new JButton("Ceļot");
     private Valstusp spele;
 
     public SpelesGUI() {
-    	
     	// krāsu definēšana
     	Color tumssFons = new Color(30, 30, 30);
     	Color laukuFons = new Color(45, 45, 45);
@@ -21,23 +21,29 @@ public class SpelesGUI extends JFrame {
     	
         // Loga parametri
         setTitle("Ceļojuma Plānotājs Eiropā");
-        setSize(450, 550);
+        setSize(450, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
         // Informācija par šis spēles vallstīm augšā
-        JPanel augsasPanelis = new JPanel(new GridLayout(2, 1));
+        JPanel augsasPanelis = new JPanel(new GridLayout(3, 1));
         augsasPanelis.setBackground(tumssFons);
+        augsasPanelis.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         
         merkaEtikete.setForeground(Color.GREEN);
         merkaEtikete.setHorizontalAlignment(JLabel.CENTER);
         merkaEtikete.setFont(new Font("SansSerif", Font.BOLD, 18));
+        
+        sakumaEtikete.setForeground(Color.CYAN);
+        sakumaEtikete.setHorizontalAlignment(JLabel.CENTER);
+        sakumaEtikete.setFont(new Font("SansSerif", Font.BOLD, 18));
         
         statusaEtikete.setForeground(Color.ORANGE);
         statusaEtikete.setHorizontalAlignment(JLabel.CENTER);
         statusaEtikete.setFont(new Font("SansSerif", Font.BOLD, 18));
         
         augsasPanelis.add(merkaEtikete);
+        augsasPanelis.add(sakumaEtikete);
         augsasPanelis.add(statusaEtikete);
         add(augsasPanelis, BorderLayout.NORTH);
 
@@ -79,6 +85,7 @@ public class SpelesGUI extends JFrame {
         
         spele = new Valstusp();
         iestatitMerki(spele.getMerkis());
+        iestatitSakumu(spele.getPasreizeja());
         iestatitStatusu(spele.getPasreizeja());
         iegutCelotPogu().addActionListener(e -> {
             String ievade = iegutIevadi().trim();
@@ -93,11 +100,15 @@ public class SpelesGUI extends JFrame {
 
     // Logika, ko var piesaistīt
     public void iestatitMerki(String merkis) {
-        merkaEtikete.setText("GALAmerkis: " + merkis);
+        merkaEtikete.setText("Galamērķis: " + merkis);
+    }
+    
+    public void iestatitSakumu(String sakums) {
+        sakumaEtikete.setText("Sākuma valsts: " + sakums);
     }
 
     public void iestatitStatusu(String pasreizeja) {
-        statusaEtikete.setText("PAŠREIZ ATRODATIES: " + pasreizeja);
+        statusaEtikete.setText("Pašreizējā valsts: " + pasreizeja);
     }
 
     public void pievienotVesturei(String teksts) {
@@ -124,5 +135,3 @@ public class SpelesGUI extends JFrame {
     }
 
 }
-
-
