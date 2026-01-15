@@ -3,12 +3,17 @@ import java.util.*;
 public class Valstusp {
 	
 	static Map<String, List<String>> robezas = new HashMap<>();
-	
-	static void pievienot(String valsts, String... kaimini) {
-		robezas.put(valsts, Arrays.asList(kaimini));
+	private String sakums;
+	private String merkis;
+	private String pasreizeja;
+
+	public Valstusp() {
+		inicializetValstis();
+		izveletiesValstis();
 	}
 	
-	public static void main(String[] args) {
+	
+	private void inicializetValstis() {
 		
 		//pirmā ir valsts un pārejie ir tās kaimiņi kuri tiek ielikti listā
 		pievienot("Latvija", "Lietuva", "Igaunija", "Krievija", "Baltkrievija");
@@ -64,56 +69,56 @@ public class Valstusp {
 		pievienot("Moldova", "Rumānija", "Ukraina");
 		pievienot("Baltkrievija", "Latvija", "Lietuva", "Polija", "Ukraina", "Krievija");
 		pievienot("Krievija", "Norvēģija", "Somija", "Igaunija", "Latvija", "Baltkrievija", "Ukraina");
+	}
+	static void pievienot(String valsts, String... kaimini) {
+		robezas.put(valsts, Arrays.asList(kaimini));
+	}
 		
+	//random sākuma un beigu valsts, kura nedrīgst būt vienāda
+	private void izveletiesValstis() {
 		List<String> valstis = new ArrayList<>(robezas.keySet());
 		Random rand = new Random();
 		
-		//random sākuma un beigu valsts, kura nedrīgst būt vienāda
-		String sakums = valstis.get(rand.nextInt(valstis.size()));
-		String beigas = valstis.get(rand.nextInt(valstis.size()));
-		
+		sakums = valstis.get(rand.nextInt(valstis.size()));
+        merkis = valstis.get(rand.nextInt(valstis.size()));
+
 		while (sakums.equals(beigas)) {
 			beigas = valstis.get (rand.nextInt(valstis.size()));
 		}
 
-		 System.out.println("Savieno Eiropas valstis!");
-        System.out.println("Sākuma valsts: " + sakums);
-        System.out.println("Mērķa valsts: " + beigas);
-        System.out.println("Ievadi valstis PA VIENAI (raksti 'stop', lai padotos)\n");
+		pasreizeja = sakums;
+	}
+	
+	public String getMerkis(){
+		return merkis;
+	}
+	
+    public String getPasreizeja();
+		return pasreizeja;
+	}
 
-        Scanner sc = new Scanner(System.in);
-        String iepriekseja = sakums;
-
-        while (true) {
-            System.out.print("Nākamā valsts: ");
-            String ievade = sc.nextLine().trim();
-
-            if (ievade.equalsIgnoreCase("stop")) {
-                System.out.println("Spēle pārtraukta.");
-                break;
-            }
-
-            if (!robezas.containsKey(ievade)) {
-                System.out.println("Šāda valsts nav sarakstā!");
-                break;
-            }
-
-            if (!robezas.get(iepriekseja).contains(ievade)) {
-                System.out.println(ievade + " nerobežojas ar " + iepriekseja);
-                break;
-            }
-
-            iepriekseja = ievade;
-
-            if (iepriekseja.equals(beigas)) {
-                System.out.println("Apsveicu! Tu sasniedzi mērķa valsti!");
-                break;
-            }
+	public String apstradatIevadi(String ievade) {
+		
+		if (!robezas.containsKey(ievade)) {
+            System.out.println("Šāda valsts nav sarakstā!");
+            break;
         }
 
-        sc.close();
-    }
-}
+        if (!robezas.get(pasreizeja).contains(ievade)) {
+            System.out.println(ievade + " nerobežojas ar " + pasreizeja);
+            break;
+        }
+
+		pasreizeja = ievade;
+
+		if (pasreizeja.equals(merkis)) {
+			return "Esi sasniedzis galamērķi!"
+		}
+
+		return "Nokļuvāt no "+ sakums +" uz "+ merkis;
 	}
 }
+	
+
+
 
