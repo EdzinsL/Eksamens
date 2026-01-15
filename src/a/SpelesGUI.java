@@ -9,7 +9,7 @@ public class SpelesGUI extends JFrame {
     private JLabel statusaEtikete = new JLabel("Pašreizēja valsts: ---");
     private JLabel merkaEtikete = new JLabel("Galamērķis: ---");
     private JButton celotPoga = new JButton("Ceļot");
-    private SpelesLogika spele;
+    private Valstusp spele;
 
     public SpelesGUI() {
     	
@@ -77,7 +77,7 @@ public class SpelesGUI extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         
-        spele = new SpelesLogika();
+        spele = new Valstusp();
         iestatitMerki(spele.getMerkis());
         iestatitStatusu(spele.getPasreizeja());
         iegutCelotPogu().addActionListener(e -> {
@@ -124,3 +124,4 @@ public class SpelesGUI extends JFrame {
     }
 
 }
+
